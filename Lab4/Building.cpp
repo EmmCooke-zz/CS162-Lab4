@@ -17,14 +17,7 @@ Building::Building()
 {
 	setName("");
 	setAddress("");
-	setSize("0");
-}
-
-Building::Building(string nameIn, string addressIn)
-{
-	setName(nameIn);
-	setAddress(addressIn);
-	setSize("0");
+	setSize("N/A");
 }
 
 /*************************************************

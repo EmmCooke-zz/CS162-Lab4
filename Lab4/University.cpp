@@ -15,16 +15,25 @@ using std::ifstream;
 
 #include "University.hpp"
 
-
+/*************************************************
+* Description: Default constructor for the University class.
+*************************************************/
 University::University()
 {
+	OSUPeople = new vector<Person>;
 }
 
-
+/*************************************************
+* Description: Default constructor for the University class.
+*************************************************/
 University::~University()
 {
+	delete OSUPeople;
 }
 
+/*************************************************
+* Description: Default constructor for the University class.
+*************************************************/
 void University::readBuildings()
 {
 	string buildingLine,
@@ -50,29 +59,51 @@ void University::readBuildings()
 			stringSize = buildingLine.size() - stringSize;
 			buildingSize = buildingLine.substr(tabTwo + 1, stringSize);
 
-			Building currentBuilding(buildingName, buildingAddress, buildingSize);
-			this->addBuilding(currentBuilding);
+			string correctBuildingSize = "";
+			for (int i = 0; i < buildingSize.length(); i++)
+			{
+				if (buildingSize[i] != ',')
+				{
+					correctBuildingSize += buildingSize[i];
+				}
+			}
+
+			if (correctBuildingSize.length() > 5)
+			{
+				Building currentBuilding(buildingName, buildingAddress, correctBuildingSize);
+				this->addBuilding(currentBuilding);
+			}
+			
 		}
 		buildingList.close();
 	}
 	
 }
 
-
+/*************************************************
+* Description: Default constructor for the University class.
+*************************************************/
 void University::addBuilding(Building buildingIn)
 {
 	OSUBuildings.push_back(buildingIn);
 }
 
+/*************************************************
+* Description: Prints the Buildings that have an available
+* sq ft.
+*************************************************/
 void University::printBuildings() const
 {
 	if (OSUBuildings.size() > 0)
 	{
 		for (unsigned int i = 0; i < OSUBuildings.size(); i++)
 		{
-			cout << "Name:    " << OSUBuildings[i].getName() << endl;
-			cout << "Address: " << OSUBuildings[i].getAddress() << endl;
-			cout << "Size:    " << OSUBuildings[i].getSize() << endl << endl;
+			if (OSUBuildings[i].getSize() != "-")
+			{
+				cout << "Name:    " << OSUBuildings[i].getName() << endl;
+				cout << "Address: " << OSUBuildings[i].getAddress() << endl;
+				cout << "Size:    " << OSUBuildings[i].getSize() << " sqft" << endl << endl;
+			}
 
 		}
 	}

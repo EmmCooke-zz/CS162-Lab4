@@ -6,5 +6,7 @@ int main()
 	OSU.readBuildings();
 	OSU.printBuildings();
 
+
+
 	return 0;
 }
